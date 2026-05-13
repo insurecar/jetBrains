@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 
+const apiBaseUrl = import.meta.env.PROD
+  ? "https://jetbrains-29aw.onrender.com"
+  : "/api";
+
 function formatValue(value) {
   if (value === null) {
     return "null";
@@ -42,7 +46,7 @@ function App() {
   useEffect(() => {
     async function loadFeedback() {
       try {
-        const response = await fetch("/api/feedback");
+        const response = await fetch(`${apiBaseUrl}/feedback`);
 
         if (!response.ok) {
           throw new Error("Request failed");

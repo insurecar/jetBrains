@@ -7,7 +7,7 @@ export default defineConfig({
     port: 4335,
     proxy: {
       "/api": {
-        target: "http://localhost:4334",
+        target: "https://jetbrains-29aw.onrender.com",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ""),
       },
