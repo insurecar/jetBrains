@@ -1,11 +1,14 @@
 const { MongoClient } = require("mongodb");
 
-const mongoUri =
-  "mongodb+srv://rostyslavshyianexternal_db_user:TestPassword12345@cluster0.eljvsqf.mongodb.net/jetbrains?retryWrites=true&w=majority&appName=Cluster0";
-
 let db;
 
 async function connectDB() {
+  const mongoUri = process.env.MONGO_URI;
+
+  if (!mongoUri) {
+    throw new Error("MONGO_URI is not defined");
+  }
+
   const client = new MongoClient(mongoUri);
 
   await client.connect();
