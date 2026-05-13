@@ -1,5 +1,6 @@
 require("dotenv").config({ quiet: true });
 
+const cors = require("cors");
 const express = require("express");
 const { connectDB } = require("./config/db");
 const {
@@ -9,7 +10,18 @@ const {
 
 const app = express();
 const port = process.env.PORT || 4334;
+const allowedOrigins = [
+  "http://localhost:4335",
+  "https://writerside-form.netlify.app",
+];
 
+app.use(
+  cors({
+    origin: allowedOrigins,
+    methods: ["GET", "POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
 app.use(express.json());
 
 app.get("/feedback", getFeedback);
