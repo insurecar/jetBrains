@@ -10,14 +10,10 @@ const {
 
 const app = express();
 const port = process.env.PORT || 4334;
-const allowedOrigins = [
-  "http://localhost:4335",
-  "https://writerside-form.netlify.app",
-];
 
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: "*",
     methods: ["GET", "POST", "OPTIONS"],
     allowedHeaders: ["Content-Type"],
   })
