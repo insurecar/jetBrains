@@ -16,23 +16,42 @@ function formatValue(value) {
   return String(value);
 }
 
+function isHighlightedField(key) {
+  return ["name", "email", "content", "feedback", "comment", "message"].includes(
+    key.toLowerCase()
+  );
+}
+
 function FeedbackCard({ item }) {
   const fields = Object.entries(item);
 
   return (
     <article className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
       <div className="space-y-3">
-        {fields.map(([key, value]) => (
-          <div
-            className="grid gap-1 border-b border-slate-100 pb-3 last:border-b-0 last:pb-0 sm:grid-cols-[140px_1fr] sm:gap-4"
-            key={key}
-          >
-            <dt className="text-sm font-semibold text-slate-500">{key}</dt>
-            <dd className="min-w-0 whitespace-pre-wrap break-words text-sm text-slate-900">
-              {formatValue(value)}
-            </dd>
-          </div>
-        ))}
+        {fields.map(([key, value]) => {
+          const isHighlighted = isHighlightedField(key);
+          const highlightStyle = isHighlighted ? { color: "lightgreen" } : {};
+
+          return (
+            <div
+              className="grid gap-1 border-b border-slate-100 pb-3 last:border-b-0 last:pb-0 sm:grid-cols-[140px_1fr] sm:gap-4"
+              key={key}
+            >
+              <dt
+                className="text-sm font-semibold text-slate-500"
+                style={highlightStyle}
+              >
+                {key}
+              </dt>
+              <dd
+                className="min-w-0 whitespace-pre-wrap break-words text-sm text-slate-900"
+                style={highlightStyle}
+              >
+                {formatValue(value)}
+              </dd>
+            </div>
+          );
+        })}
       </div>
     </article>
   );
