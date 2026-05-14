@@ -12,8 +12,13 @@ function getCaptchaToken(body) {
 }
 
 function getFeedbackData(body) {
-  const { captchaToken, recaptchaToken, recaptcha, publicKey, ...feedbackData } =
-    body;
+  const {
+    captchaToken,
+    recaptchaToken,
+    recaptcha,
+    publicKey,
+    ...feedbackData
+  } = body;
 
   delete feedbackData["g-recaptcha-response"];
 
